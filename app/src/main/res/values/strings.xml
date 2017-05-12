@@ -11,4 +11,5 @@
     </string-array>
 
     <string name="lessons_url">http://alvideobackend.azurewebsites.net/lesson/%1$s/</string>
+    <string name="title_activity_third">ThirdActivity</string>
 </resources>

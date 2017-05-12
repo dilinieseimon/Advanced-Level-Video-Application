@@ -1,11 +1,14 @@
 package com.example.acer.videoapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -20,7 +23,7 @@ public class SecondActivity extends AppCompatActivity {
 
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    private ListView lv;
+    private ListView listView1;
     Toolbar toolbar1;
     String subjectName;
 
@@ -41,8 +44,18 @@ public class SecondActivity extends AppCompatActivity {
         }
 
         lessonList = new ArrayList<>();
-        lv = (ListView) findViewById(R.id.list);
+        listView1 = (ListView) findViewById(R.id.list);
         new GetLessons().execute();
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                intent.putExtra("Subject", listView1.getItemAtPosition(i).toString());
+                startActivity(intent);
+            }
+        });
+
     }
 
     /* Async task class to get json by making HTTP call
@@ -128,7 +141,7 @@ public class SecondActivity extends AppCompatActivity {
              * */
             ListAdapter adapter = new SimpleAdapter(
                     SecondActivity.this, lessonList,R.layout.list_item, new String[]{"number", "name",}, new int[]{R.id.lnumber,R.id.lname});
-            lv.setAdapter(adapter);
+            listView1.setAdapter(adapter);
         }
 
 
