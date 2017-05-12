@@ -9,4 +9,6 @@
         <item>Chemistry</item>
         <item>Physics</item>
     </string-array>
+
+    <string name="lessons_url">http://alvideobackend.azurewebsites.net/lesson/%1$s/</string>
 </resources>

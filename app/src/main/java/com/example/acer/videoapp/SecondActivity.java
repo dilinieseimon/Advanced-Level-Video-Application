@@ -10,11 +10,9 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,9 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private ListView lv;
     Toolbar toolbar1;
-
-    // URL to get contacts JSON
-    private static String url = "http://alvideobackend.azurewebsites.net/lesson/Chemistry";
+    String subjectName;
 
     ArrayList<HashMap<String, String>> lessonList;
 
@@ -41,12 +37,11 @@ public class SecondActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
             toolbar1.setTitle(bundle.getString("Subject"));
+            subjectName=toolbar1.getTitle().toString();
         }
 
         lessonList = new ArrayList<>();
-
         lv = (ListView) findViewById(R.id.list);
-
         new GetLessons().execute();
     }
 
@@ -70,27 +65,24 @@ public class SecondActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
+            String url = getResources().getString(R.string.lessons_url, subjectName);
             String jsonStr = sh.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
             if (jsonStr != null) {
                 try {
-
+                    // Getting JSON Array
                     JSONArray lessons = new JSONArray(jsonStr);
-                    //JSONObject jsonObj = new JSONObject(jsonStr);
 
-                    // Getting JSON Array node
-                    // JSONArray lessons = jsonObj.getJSONArray("");
-
-                    // looping through All Contacts
+                    // looping through All lessons
                     for (int i = 0; i < lessons.length(); i++) {
                         JSONObject c = lessons.getJSONObject(i);
 
                         String number = c.getString("lessonNo");
                         String name = c.getString("lessonName");
 
-                        // tmp hash map for single contact
+                        // tmp hash map for single lesson
                         HashMap<String, String> lesson = new HashMap<>();
 
                         // adding each child node to HashMap key => value
@@ -98,7 +90,7 @@ public class SecondActivity extends AppCompatActivity {
                         lesson.put("name", name);
 
 
-                        // adding contact to contact list
+                        // adding lesson to lesson list
                         lessonList.add(lesson);
                     }
                 } catch (final JSONException e) {
