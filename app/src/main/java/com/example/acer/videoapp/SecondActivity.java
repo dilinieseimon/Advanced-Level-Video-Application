@@ -51,15 +51,14 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                intent.putExtra("Subject", listView1.getItemAtPosition(i).toString());
+                //intent.putExtra("Lesson", listView1.getItemAtPosition(i).toString());
                 startActivity(intent);
             }
         });
 
     }
 
-    /* Async task class to get json by making HTTP call
-    */
+    /* Async task class to get json by making HTTP call */
     private class GetLessons extends AsyncTask<Void, Void, Void> {
 
         @Override
