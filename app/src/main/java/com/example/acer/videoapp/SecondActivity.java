@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class SecondActivity extends AppCompatActivity {
 
     private String TAG = MainActivity.class.getSimpleName();
@@ -51,8 +52,20 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                //intent.putExtra("Lesson", listView1.getItemAtPosition(i).toString());
+                HashMap<String, String> lesson = lessonList.get(i);
+                intent.putExtra("number", lesson.get("number"));
+                intent.putExtra("name", lesson.get("name"));
+                //intent.putExtra("subject", listView1.getItemAtPosition(i).toString());
                 startActivity(intent);
+            }
+        });
+
+        //back navigation
+        toolbar1.setNavigationIcon(R.drawable.back);
+        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
 
@@ -141,6 +154,9 @@ public class SecondActivity extends AppCompatActivity {
             ListAdapter adapter = new SimpleAdapter(
                     SecondActivity.this, lessonList,R.layout.list_item, new String[]{"number", "name",}, new int[]{R.id.lnumber,R.id.lname});
             listView1.setAdapter(adapter);
+
+
+
         }
 
 
