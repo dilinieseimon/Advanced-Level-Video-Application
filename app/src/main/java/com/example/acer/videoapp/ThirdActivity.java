@@ -50,17 +50,25 @@ public class ThirdActivity extends AppCompatActivity {
         listView2 = (ListView) findViewById(R.id.list2);
         new GetExperiments().execute();
 
-        /*listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                //Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                //HashMap<String, String> lesson = experimentList.get(i);
-                //intent.putExtra("number", lesson.get("number"));
-                //intent.putExtra("name", lesson.get("name"));
-                //intent.putExtra("subject", listView1.getItemAtPosition(i).toString());
-                //startActivity(intent);
+                Intent intent = new Intent(ThirdActivity.this, FourthActivity.class);
+                HashMap<String, String> lesson = experimentList.get(i);
+                intent.putExtra("name", lesson.get("name"));
+                intent.putExtra("link", lesson.get("link"));
+                startActivity(intent);
             }
-        });*/
+        });
+
+        //set back button on toolbar
+        toolbar2.setNavigationIcon(R.drawable.back);
+        toolbar2.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
     }

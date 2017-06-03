@@ -60,14 +60,16 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-        //back navigation
+        //set back button on toolbar
         toolbar1.setNavigationIcon(R.drawable.back);
         toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                onBackPressed();
             }
         });
+
+
 
     }
 
