@@ -6,6 +6,7 @@
     <string name="title_activity_second">SecondActivity</string>
     <string name="title_activity_third">ThirdActivity</string>
     <string name="title_activity_splash">Svijest</string>
+    <string name="title_activity_fourth">FourthActivity</string>
 
     <string-array name="subjects">
         <item>Chemistry</item>
@@ -16,6 +17,11 @@
     <string name="experiments_url">http://alvideobackend.azurewebsites.net/experiment/Physics/%1$s/</string>
     <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="splash">Presented by Good Shepherd Convent, Kandy</string>
-    <string name="title_activity_fourth">FourthActivity</string>
+    <string name="title">Svijest</string>
+    <string name="description">A visulaized collection of</string>
+    <string name="description2">physics concepts and processes</string>
+    
+    <string name="presented_by">Presented by Good Shepherd Convent, Kandy</string>
+    <string name="copyright">2017 Kryptonite</string>
+
 </resources>
