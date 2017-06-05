@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         listView = (ListView) findViewById(R.id.listView);
 
-
         subjectList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);
         new GetSubjects().execute();
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 HashMap<String, String> lesson = subjectList.get(i);
+                intent.putExtra("description", lesson.get("description"));
                 intent.putExtra("engdescription", lesson.get("engdescription"));
                 startActivity(intent);
             }
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         subjectList.add(subject);
                     }
                 } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    Log.e(TAG, "");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             } else {
-                Log.e(TAG, "Couldn't get json from server.");
+                Log.e(TAG, "Please check your Internet Connection");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

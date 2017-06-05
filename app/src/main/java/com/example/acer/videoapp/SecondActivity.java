@@ -41,8 +41,8 @@ public class SecondActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
-            toolbar1.setTitle(bundle.getString("engdescription"));
-            subjectName=toolbar1.getTitle().toString();
+            toolbar1.setTitle(bundle.getString("description"));
+            subjectName=bundle.getString("engdescription");
         }
 
         lessonList = new ArrayList<>();
@@ -124,7 +124,7 @@ public class SecondActivity extends AppCompatActivity {
                         lessonList.add(lesson);
                     }
                 } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    Log.e(TAG, "");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -134,7 +134,7 @@ public class SecondActivity extends AppCompatActivity {
 
                 }
             } else {
-                Log.e(TAG, "Couldn't get json from server.");
+                Log.e(TAG, "Please check your Internet Connection");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

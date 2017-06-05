@@ -71,8 +71,6 @@ public class ThirdActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
     }
 
     /* Async task class to get json by making HTTP call */
@@ -126,7 +124,7 @@ public class ThirdActivity extends AppCompatActivity {
                         experimentList.add(experiment);
                     }
                 } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    Log.e(TAG, "");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -136,7 +134,7 @@ public class ThirdActivity extends AppCompatActivity {
 
                 }
             } else {
-                Log.e(TAG, "Couldn't get json from server.");
+                Log.e(TAG, "Please check your Internet Connection");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -161,9 +159,6 @@ public class ThirdActivity extends AppCompatActivity {
             ListAdapter adapter1 = new SimpleAdapter(
                     ThirdActivity.this, experimentList,R.layout.list_item, new String[]{"name","engname",}, new int[]{R.id.lname,R.id.lname1});
             listView2.setAdapter(adapter1);
-
-
-
 
         }
 

@@ -37,14 +37,11 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
-            //toolbar2.setTitle(bundle.getString("name"));
-            //lessonNo=bundle.getString("name");
             TextView textView = (TextView) findViewById(R.id.text);
             textView.setText(bundle.getString("name"));
             TextView textView1 = (TextView) findViewById(R.id.text1);
             textView1.setText(bundle.getString("engname"));
             VIDEO_ID=bundle.getString("link");
-            //textView.setText(bundle.getString("name"));
         }
 
         //set back button on toolbar
