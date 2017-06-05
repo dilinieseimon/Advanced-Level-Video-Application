@@ -2,6 +2,7 @@ package com.example.acer.videoapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -15,7 +16,8 @@ import com.google.android.youtube.player.YouTubePlayerView;
 
 public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
     public static final String API_KEY = "AIzaSyCjf4x-6Tpkz4gGS2Of1xVXD0lIt7u1ERI";
-    public static final String VIDEO_ID = "WH1K2NVnqgs";
+    public static String VIDEO_ID = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,16 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
         //initializing youtube player view
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
         youTubePlayerView.initialize(API_KEY, this);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+            //toolbar2.setTitle(bundle.getString("name"));
+            //lessonNo=bundle.getString("name");
+            TextView textView = (TextView) findViewById(R.id.text);
+            textView.setText(bundle.getString("name"));
+            VIDEO_ID=bundle.getString("link");
+            //textView.setText(bundle.getString("name"));
+        }
     }
 
     @Override

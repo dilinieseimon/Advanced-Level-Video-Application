@@ -55,7 +55,7 @@ public class SecondActivity extends AppCompatActivity {
                 HashMap<String, String> lesson = lessonList.get(i);
                 intent.putExtra("number", lesson.get("number"));
                 intent.putExtra("name", lesson.get("name"));
-                //intent.putExtra("subject", listView1.getItemAtPosition(i).toString());
+                intent.putExtra("engname", lesson.get("engname"));
                 startActivity(intent);
             }
         });
@@ -108,6 +108,7 @@ public class SecondActivity extends AppCompatActivity {
 
                         String number = c.getString("lessonNo");
                         String name = c.getString("lessonName");
+                        String engname = c.getString("lessonEngName");
 
                         // tmp hash map for single lesson
                         HashMap<String, String> lesson = new HashMap<>();
@@ -115,6 +116,8 @@ public class SecondActivity extends AppCompatActivity {
                         // adding each child node to HashMap key => value
                         lesson.put("number", number);
                         lesson.put("name", name);
+                        lesson.put("engname", engname);
+
 
 
                         // adding lesson to lesson list
@@ -154,7 +157,7 @@ public class SecondActivity extends AppCompatActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter = new SimpleAdapter(
-                    SecondActivity.this, lessonList,R.layout.list_item, new String[]{"number", "name",}, new int[]{R.id.lnumber,R.id.lname});
+                    SecondActivity.this, lessonList,R.layout.list_item, new String[]{"number", "name", "engname",}, new int[]{R.id.lnumber,R.id.lname,R.id.lname1});
             listView1.setAdapter(adapter);
 
 

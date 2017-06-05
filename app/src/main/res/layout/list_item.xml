@@ -26,4 +26,17 @@
         android:textSize="17sp"
         android:textColor="@android:color/black" />
 
+    <TextView
+        android:id="@+id/lname1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lname"
+        android:paddingBottom="20dip"
+        android:paddingTop="20dip"
+        android:paddingLeft="10dip"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="17sp"
+        android:textColor="@android:color/black" />
+
     </LinearLayout>
