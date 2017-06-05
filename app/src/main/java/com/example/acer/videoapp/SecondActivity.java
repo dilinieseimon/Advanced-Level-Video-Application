@@ -37,10 +37,11 @@ public class SecondActivity extends AppCompatActivity {
 
         //setting title to toolbar
         toolbar1 = (Toolbar) findViewById(R.id.toolbar1);
+        toolbar1.setTitleTextColor(getColor(R.color.white));
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
-            toolbar1.setTitle(bundle.getString("Subject"));
+            toolbar1.setTitle(bundle.getString("engdescription"));
             subjectName=toolbar1.getTitle().toString();
         }
 
@@ -55,7 +56,6 @@ public class SecondActivity extends AppCompatActivity {
                 HashMap<String, String> lesson = lessonList.get(i);
                 intent.putExtra("number", lesson.get("number"));
                 intent.putExtra("name", lesson.get("name"));
-                intent.putExtra("engname", lesson.get("engname"));
                 startActivity(intent);
             }
         });
@@ -157,7 +157,7 @@ public class SecondActivity extends AppCompatActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter = new SimpleAdapter(
-                    SecondActivity.this, lessonList,R.layout.list_item, new String[]{"number", "name", "engname",}, new int[]{R.id.lnumber,R.id.lname,R.id.lname1});
+                    SecondActivity.this, lessonList,R.layout.list_item, new String[]{"name","engname",}, new int[]{R.id.lname,R.id.lname1});
             listView1.setAdapter(adapter);
 
 

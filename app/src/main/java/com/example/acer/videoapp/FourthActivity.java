@@ -2,6 +2,8 @@ package com.example.acer.videoapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,12 +19,17 @@ import com.google.android.youtube.player.YouTubePlayerView;
 public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
     public static final String API_KEY = "AIzaSyCjf4x-6Tpkz4gGS2Of1xVXD0lIt7u1ERI";
     public static String VIDEO_ID = "";
+    Toolbar toolbar3;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fourth);
+
+        //setting title to toolbar
+        toolbar3 = (Toolbar) findViewById(R.id.toolbar3);
+        toolbar3.setTitleTextColor(getColor(R.color.white));
 
         //initializing youtube player view
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
@@ -34,9 +41,20 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
             //lessonNo=bundle.getString("name");
             TextView textView = (TextView) findViewById(R.id.text);
             textView.setText(bundle.getString("name"));
+            TextView textView1 = (TextView) findViewById(R.id.text1);
+            textView1.setText(bundle.getString("engname"));
             VIDEO_ID=bundle.getString("link");
             //textView.setText(bundle.getString("name"));
         }
+
+        //set back button on toolbar
+        toolbar3.setNavigationIcon(R.drawable.back);
+        toolbar3.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override

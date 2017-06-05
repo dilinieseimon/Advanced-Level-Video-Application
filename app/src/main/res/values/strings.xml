@@ -9,10 +9,9 @@
     <string name="title_activity_fourth">FourthActivity</string>
 
     <string-array name="subjects">
-        <item>Chemistry</item>
         <item>Physics</item>
     </string-array>
-
+    <string name="subjects_url">http://alvideobackend.azurewebsites.net/subject</string>
     <string name="lessons_url">http://alvideobackend.azurewebsites.net/lesson/%1$s/</string>
     <string name="experiments_url">http://alvideobackend.azurewebsites.net/experiment/Physics/%1$s/</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -22,6 +21,6 @@
     <string name="description2">physics concepts and processes</string>
 
     <string name="presented_by">Presented by Good Shepherd Convent, Kandy</string>
-    <string name="copyright">2017 Kryptonite</string>
+    <string name="copyright">© 2017 Kryptonite</string>
 
 </resources>

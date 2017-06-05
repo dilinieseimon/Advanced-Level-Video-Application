@@ -33,6 +33,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/youtube_player"/>
+        android:layout_below="@+id/youtube_player"
+        android:textColor="@android:color/black"/>
+
+    <TextView android:id="@+id/text1"
+        android:editable = "true"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text"/>
 
 </RelativeLayout>

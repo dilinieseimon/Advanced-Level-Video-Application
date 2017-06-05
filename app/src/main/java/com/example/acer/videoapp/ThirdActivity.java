@@ -39,6 +39,7 @@ public class ThirdActivity extends AppCompatActivity {
 
         //setting title to toolbar
         toolbar2 = (Toolbar) findViewById(R.id.toolbar2);
+        toolbar2.setTitleTextColor(getColor(R.color.white));
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
@@ -56,6 +57,7 @@ public class ThirdActivity extends AppCompatActivity {
                 Intent intent = new Intent(ThirdActivity.this, FourthActivity.class);
                 HashMap<String, String> lesson = experimentList.get(i);
                 intent.putExtra("name", lesson.get("name"));
+                intent.putExtra("engname", lesson.get("engname"));
                 intent.putExtra("link", lesson.get("link"));
                 startActivity(intent);
             }
@@ -109,6 +111,7 @@ public class ThirdActivity extends AppCompatActivity {
 
                         String name = c.getString("expName");
                         String link = c.getString("expLink");
+                        String engname = c.getString("expEngName");
 
                         // tmp hash map for single lesson
                         HashMap<String, String> experiment = new HashMap<>();
@@ -116,8 +119,7 @@ public class ThirdActivity extends AppCompatActivity {
                         // adding each child node to HashMap key => value
                         experiment.put("name", name);
                         experiment.put("link", link);
-                        Log.d("name", name);
-                        Log.d("link",link);
+                        experiment.put("engname", engname);
 
 
                         // adding lesson to lesson list
@@ -157,8 +159,7 @@ public class ThirdActivity extends AppCompatActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter1 = new SimpleAdapter(
-                    //SecondActivity.this, lessonList,R.layout.list_item, new String[]{"number", "name",}, new int[]{R.id.lnumber,R.id.lname});
-                    ThirdActivity.this, experimentList,R.layout.list_item, new String[]{"name"}, new int[]{R.id.lname});
+                    ThirdActivity.this, experimentList,R.layout.list_item, new String[]{"name","engname",}, new int[]{R.id.lname,R.id.lname1});
             listView2.setAdapter(adapter1);
 
 
