@@ -1,9 +1,11 @@
 package com.example.acer.videoapp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.TextView;
 
 
 public class Splash extends AppCompatActivity {
