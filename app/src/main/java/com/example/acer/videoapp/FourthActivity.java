@@ -41,6 +41,8 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
             textView.setText(bundle.getString("name"));
             TextView textView1 = (TextView) findViewById(R.id.text1);
             textView1.setText(bundle.getString("engname"));
+            TextView textView2 = (TextView) findViewById(R.id.text2);
+            textView2.setText(bundle.getString("desc"));
             VIDEO_ID=bundle.getString("link");
         }
 

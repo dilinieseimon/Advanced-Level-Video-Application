@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -32,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         listView = (ListView) findViewById(R.id.listView);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("විෂයන්");
+        toolbar.setTitleTextColor(getColor(R.color.white));
 
         subjectList = new ArrayList<>();
         listView = (ListView) findViewById(R.id.listView);

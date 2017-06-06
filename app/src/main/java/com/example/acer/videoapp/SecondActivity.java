@@ -160,8 +160,6 @@ public class SecondActivity extends AppCompatActivity {
                     SecondActivity.this, lessonList,R.layout.list_item, new String[]{"name","engname",}, new int[]{R.id.lname,R.id.lname1});
             listView1.setAdapter(adapter);
 
-
-
         }
 
 

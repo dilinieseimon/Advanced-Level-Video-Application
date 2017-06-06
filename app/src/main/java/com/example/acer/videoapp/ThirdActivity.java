@@ -59,6 +59,7 @@ public class ThirdActivity extends AppCompatActivity {
                 intent.putExtra("name", lesson.get("name"));
                 intent.putExtra("engname", lesson.get("engname"));
                 intent.putExtra("link", lesson.get("link"));
+                intent.putExtra("desc", lesson.get("desc"));
                 startActivity(intent);
             }
         });
@@ -110,6 +111,7 @@ public class ThirdActivity extends AppCompatActivity {
                         String name = c.getString("expName");
                         String link = c.getString("expLink");
                         String engname = c.getString("expEngName");
+                        String desc = c.getString("expDescription");
 
                         // tmp hash map for single lesson
                         HashMap<String, String> experiment = new HashMap<>();
@@ -118,6 +120,7 @@ public class ThirdActivity extends AppCompatActivity {
                         experiment.put("name", name);
                         experiment.put("link", link);
                         experiment.put("engname", engname);
+                        experiment.put("desc",desc);
 
 
                         // adding lesson to lesson list
