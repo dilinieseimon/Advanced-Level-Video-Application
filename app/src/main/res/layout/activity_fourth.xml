@@ -1,7 +1,14 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
     tools:context="com.example.acer.videoapp.FourthActivity">
 
     <android.support.v7.widget.Toolbar
@@ -23,6 +30,7 @@
         android:background="#fff">
     </com.google.android.youtube.player.YouTubePlayerView>
 
+
     <TextView android:id="@+id/text"
         android:editable = "true"
         android:textSize="20dp"
@@ -36,28 +44,39 @@
         android:layout_below="@+id/youtube_player"
         android:textColor="@android:color/black"/>
 
-    <TextView android:id="@+id/text1"
-        android:editable = "true"
-        android:textSize="17dp"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/text"/>
 
-    <TextView android:id="@+id/text2"
-        android:editable = "true"
-        android:textSize="15dp"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/text1"/>
+
+
+
+
+                <TextView android:id="@+id/text1"
+                    android:editable = "true"
+                    android:textSize="17dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/text"/>
+
+                <TextView android:id="@+id/text2"
+                    android:editable = "true"
+                    android:textSize="15dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/text1"/>
+
+
+
+
+
 
 </RelativeLayout>
+</ScrollView>
