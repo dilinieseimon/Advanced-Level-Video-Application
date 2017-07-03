@@ -1,8 +1,8 @@
-package com.example.acer.videoapp;
+package com.dilinieseimon.acer.svijest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,9 +31,14 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
         toolbar3 = (Toolbar) findViewById(R.id.toolbar3);
         toolbar3.setTitleTextColor(getColor(R.color.white));
 
-        //initializing youtube player view
-        YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
-        youTubePlayerView.initialize(API_KEY, this);
+        //set back button on toolbar
+        toolbar3.setNavigationIcon(R.drawable.back);
+        toolbar3.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
@@ -44,16 +49,14 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
             TextView textView2 = (TextView) findViewById(R.id.text2);
             textView2.setText(bundle.getString("desc"));
             VIDEO_ID=bundle.getString("link");
+            Log.d("link",VIDEO_ID);
         }
 
-        //set back button on toolbar
-        toolbar3.setNavigationIcon(R.drawable.back);
-        toolbar3.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        //initializing youtube player view
+        if(!VIDEO_ID.equals("null")) {
+            YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
+            youTubePlayerView.initialize(API_KEY, this);
+        }
     }
 
     @Override
@@ -63,13 +66,15 @@ public class FourthActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     @Override
     public void onInitializationSuccess(Provider provider, YouTubePlayer player, boolean wasRestored){
-        //add listeners to YouTubePlayer instance
-        player.setPlayerStateChangeListener(playerStateChangeListener);
-        player.setPlaybackEventListener(playbackEventListner);
+        if(VIDEO_ID!="null") {
+            //add listeners to YouTubePlayer instance
+            player.setPlayerStateChangeListener(playerStateChangeListener);
+            player.setPlaybackEventListener(playbackEventListner);
 
-        //start buffering
-        if (!wasRestored){
-            player.cueVideo(VIDEO_ID);
+            //start buffering
+            if (!wasRestored) {
+                player.cueVideo(VIDEO_ID);
+            }
         }
     }
 

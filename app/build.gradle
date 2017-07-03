@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "com.example.acer.videoapp"
+        applicationId "com.dilinieseimon.acer.svijest"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1

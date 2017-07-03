@@ -1,4 +1,4 @@
-package com.example.acer.videoapp;
+package com.dilinieseimon.acer.svijest;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,67 +20,48 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class SecondActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    private ListView listView1;
-    Toolbar toolbar1;
-    String subjectName;
+    Toolbar toolbar;
+    ListView listView;
 
-    ArrayList<HashMap<String, String>> lessonList;
+    ArrayList<HashMap<String, String>> subjectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_main);
+        listView = (ListView) findViewById(R.id.listView);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("විෂයන්");
+        toolbar.setTitleTextColor(getColor(R.color.white));
 
-        //setting title to toolbar
-        toolbar1 = (Toolbar) findViewById(R.id.toolbar1);
-        toolbar1.setTitleTextColor(getColor(R.color.white));
+        subjectList = new ArrayList<>();
+        listView = (ListView) findViewById(R.id.listView);
+        new GetSubjects().execute();
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle!=null) {
-            toolbar1.setTitle(bundle.getString("description"));
-            subjectName=bundle.getString("engdescription");
-        }
-
-        lessonList = new ArrayList<>();
-        listView1 = (ListView) findViewById(R.id.list);
-        new GetLessons().execute();
-
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                HashMap<String, String> lesson = lessonList.get(i);
-                intent.putExtra("number", lesson.get("number"));
-                intent.putExtra("name", lesson.get("name"));
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                HashMap<String, String> lesson = subjectList.get(i);
+                intent.putExtra("description", lesson.get("description"));
+                intent.putExtra("engdescription", lesson.get("engdescription"));
                 startActivity(intent);
             }
         });
 
-        //set back button on toolbar
-        toolbar1.setNavigationIcon(R.drawable.back);
-        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-
-
     }
 
     /* Async task class to get json by making HTTP call */
-    private class GetLessons extends AsyncTask<Void, Void, Void> {
+    private class GetSubjects extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(SecondActivity.this);
+            pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -92,7 +73,7 @@ public class SecondActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
-            String url = getResources().getString(R.string.lessons_url, subjectName);
+            String url = getResources().getString(R.string.subjects_url);
             String jsonStr = sh.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
@@ -100,35 +81,31 @@ public class SecondActivity extends AppCompatActivity {
             if (jsonStr != null) {
                 try {
                     // Getting JSON Array
-                    JSONArray lessons = new JSONArray(jsonStr);
+                    JSONArray subjects = new JSONArray(jsonStr);
 
                     // looping through All lessons
-                    for (int i = 0; i < lessons.length(); i++) {
-                        JSONObject c = lessons.getJSONObject(i);
+                    for (int i = 0; i < subjects.length(); i++) {
+                        JSONObject c = subjects.getJSONObject(i);
 
-                        String number = c.getString("lessonNo");
-                        String name = c.getString("lessonName");
-                        String engname = c.getString("lessonEngName");
+                        String description = c.getString("description");
+                        String engdescription = c.getString("engdescription");
 
                         // tmp hash map for single lesson
-                        HashMap<String, String> lesson = new HashMap<>();
+                        HashMap<String, String> subject = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        lesson.put("number", number);
-                        lesson.put("name", name);
-                        lesson.put("engname", engname);
-
-
+                        subject.put("description", description);
+                        subject.put("engdescription", engdescription);
 
                         // adding lesson to lesson list
-                        lessonList.add(lesson);
+                        subjectList.add(subject);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),"Json parsing error: " + e.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -157,12 +134,14 @@ public class SecondActivity extends AppCompatActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter = new SimpleAdapter(
-                    SecondActivity.this, lessonList,R.layout.list_item, new String[]{"name","engname",}, new int[]{R.id.lname,R.id.lname1});
-            listView1.setAdapter(adapter);
+                    MainActivity.this, subjectList,R.layout.list_item, new String[]{"description","engdescription",}, new int[]{R.id.lname,R.id.lname1});
+            listView.setAdapter(adapter);
+
+
 
         }
 
 
     }
-
 }
+

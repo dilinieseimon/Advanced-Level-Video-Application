@@ -1,4 +1,4 @@
-package com.example.acer.videoapp;
+package com.dilinieseimon.acer.svijest;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -21,48 +20,67 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
+
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
-    Toolbar toolbar;
-    ListView listView;
+    private ListView listView1;
+    Toolbar toolbar1;
+    String subjectName;
 
-    ArrayList<HashMap<String, String>> subjectList;
+    ArrayList<HashMap<String, String>> lessonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("විෂයන්");
-        toolbar.setTitleTextColor(getColor(R.color.white));
+        setContentView(R.layout.activity_second);
 
-        subjectList = new ArrayList<>();
-        listView = (ListView) findViewById(R.id.listView);
-        new GetSubjects().execute();
+        //setting title to toolbar
+        toolbar1 = (Toolbar) findViewById(R.id.toolbar1);
+        toolbar1.setTitleTextColor(getColor(R.color.white));
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+            toolbar1.setTitle(bundle.getString("description"));
+            subjectName=bundle.getString("engdescription");
+        }
+
+        lessonList = new ArrayList<>();
+        listView1 = (ListView) findViewById(R.id.list);
+        new GetLessons().execute();
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                HashMap<String, String> lesson = subjectList.get(i);
-                intent.putExtra("description", lesson.get("description"));
-                intent.putExtra("engdescription", lesson.get("engdescription"));
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                HashMap<String, String> lesson = lessonList.get(i);
+                intent.putExtra("number", lesson.get("number"));
+                intent.putExtra("name", lesson.get("name"));
                 startActivity(intent);
             }
         });
 
+        //set back button on toolbar
+        toolbar1.setNavigationIcon(R.drawable.back);
+        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+
     }
 
     /* Async task class to get json by making HTTP call */
-    private class GetSubjects extends AsyncTask<Void, Void, Void> {
+    private class GetLessons extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog = new ProgressDialog(SecondActivity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -74,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
-            String url = getResources().getString(R.string.subjects_url);
+            String url = getResources().getString(R.string.lessons_url, subjectName);
             String jsonStr = sh.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
@@ -82,31 +100,35 @@ public class MainActivity extends AppCompatActivity {
             if (jsonStr != null) {
                 try {
                     // Getting JSON Array
-                    JSONArray subjects = new JSONArray(jsonStr);
+                    JSONArray lessons = new JSONArray(jsonStr);
 
                     // looping through All lessons
-                    for (int i = 0; i < subjects.length(); i++) {
-                        JSONObject c = subjects.getJSONObject(i);
+                    for (int i = 0; i < lessons.length(); i++) {
+                        JSONObject c = lessons.getJSONObject(i);
 
-                        String description = c.getString("description");
-                        String engdescription = c.getString("engdescription");
+                        String number = c.getString("lessonNo");
+                        String name = c.getString("lessonName");
+                        String engname = c.getString("lessonEngName");
 
                         // tmp hash map for single lesson
-                        HashMap<String, String> subject = new HashMap<>();
+                        HashMap<String, String> lesson = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        subject.put("description", description);
-                        subject.put("engdescription", engdescription);
+                        lesson.put("number", number);
+                        lesson.put("name", name);
+                        lesson.put("engname", engname);
+
+
 
                         // adding lesson to lesson list
-                        subjectList.add(subject);
+                        lessonList.add(lesson);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "Json parsing error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Json parsing error: " + e.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -135,14 +157,12 @@ public class MainActivity extends AppCompatActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter = new SimpleAdapter(
-                    MainActivity.this, subjectList,R.layout.list_item, new String[]{"description","engdescription",}, new int[]{R.id.lname,R.id.lname1});
-            listView.setAdapter(adapter);
-
-
+                    SecondActivity.this, lessonList,R.layout.list_item, new String[]{"name","engname",}, new int[]{R.id.lname,R.id.lname1});
+            listView1.setAdapter(adapter);
 
         }
 
 
     }
-}
 
+}

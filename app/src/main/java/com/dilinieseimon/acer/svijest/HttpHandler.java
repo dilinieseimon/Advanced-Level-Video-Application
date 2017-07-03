@@ -1,4 +1,4 @@
-package com.example.acer.videoapp;
+package com.dilinieseimon.acer.svijest;
 
 import android.util.Log;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.acer.videoapp" >
+    package="com.dilinieseimon.acer.svijest" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,19 +10,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.dilinieseimon.acer.svijest.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name="com.dilinieseimon.acer.svijest.SecondActivity"
             android:label="@string/title_activity_second" >
         </activity>
         <activity
-            android:name=".ThirdActivity"
+            android:name="com.dilinieseimon.acer.svijest.ThirdActivity"
             android:label="@string/title_activity_third" >
         </activity>
         <activity
-            android:name=".Splash"
+            android:name="com.dilinieseimon.acer.svijest.Splash"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_splash" >
             <intent-filter>
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FourthActivity"
+            android:name="com.dilinieseimon.acer.svijest.FourthActivity"
             android:label="@string/title_activity_fourth" >
         </activity>
     </application>
